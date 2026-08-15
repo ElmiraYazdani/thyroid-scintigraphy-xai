@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Explainable Deep Learning for Multicenter Thyroid Scintigraphy</title>
+
+<meta name="description" content="Thyroid scintigraphy is a key imaging technique for assessing thyroid abnormalities, but automatic analysis is difficult due to heterogeneous disease presentation and limited annotated data. We compare CNN, multi-representation, and mixture-of-experts deep learning frameworks on a 2,448-image, five-center dataset.">
+<meta name="keywords" content="thyroid scintigraphy, deep learning, convolutional neural networks, multicenter study, explainable AI, XAI, Grad-CAM, mixture of experts, computer-aided diagnosis, nuclear medicine">
+<meta name="author" content="Elmira Yazdani, Mobin Nesari, Farshad Emami, Najme Karamzade-Ziarati, Zahra Vosoughi, Soroush Bagheri, Habibeh Vosoughi, Saeed Reza Kheradpisheh">
+<meta name="robots" content="index, follow">
+
+<!-- Open Graph -->
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Thyroid Scintigraphy XAI">
+<meta property="og:title" content="Explainable Deep Learning for Multicenter Thyroid Scintigraphy">
+<meta property="og:description" content="Comparative CNN, multi-representation, and mixture-of-experts frameworks for four-class thyroid scintigraphy classification across five nuclear medicine centers.">
+<meta property="og:url" content="./">
+<meta property="og:image" content="./static/images/og-preview.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="1502">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Explainable Deep Learning for Multicenter Thyroid Scintigraphy">
+<meta name="twitter:description" content="Comparative CNN, multi-representation, and mixture-of-experts frameworks for four-class thyroid scintigraphy classification across five nuclear medicine centers.">
+<meta name="twitter:image" content="./static/images/og-preview.jpg">
+
+<!-- Favicon -->
+<link rel="icon" type="image/x-icon" href="./static/images/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="./static/images/favicon-32.png">
+<link rel="apple-touch-icon" href="./static/images/apple-touch-icon.png">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./static/css/bulma.min.css">
+<link rel="stylesheet" href="./static/css/style.css">
+</head>
+<body>
+
+<!-- ══════════ NAV ══════════ -->
+<nav class="site-nav">
+  <div class="nav-inner">
+    <span class="brand">Thyroid Scintigraphy XAI</span>
+    <div class="nav-links">
+      <a href="#abstract">Abstract</a>
+      <a href="#method">Method</a>
+      <a href="#results">Results</a>
+      <a href="#conclusion">Conclusion</a>
+      <a href="#data">Data &amp; Code</a>
+      <a href="#citation">Citation</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ══════════ HERO ══════════ -->
+<header class="hero-paper">
+  <div class="container">
+    <h1 class="publication-title">Explainable Deep Learning for Multicenter [<sup>99m</sup>Tc]Tc&#8209;Pertechnetate Thyroid Scintigraphy: Comparative CNN, Multi&#8209;Representation, and Mixture&#8209;of&#8209;Experts Frameworks for Four&#8209;Class Classification</h1>
+
+    <div class="authors">
+      <span class="author-block">Elmira Yazdani<sup>1,*</sup></span>,
+      <span class="author-block">Mobin Nesari<sup>2</sup></span>,
+      <span class="author-block">Farshad Emami<sup>3</sup></span>,
+      <span class="author-block">Najme Karamzade&#8209;Ziarati<sup>4</sup></span>,
+      <span class="author-block">Zahra Vosoughi<sup>5</sup></span>,
+      <span class="author-block">Soroush Bagheri<sup>6</sup></span>,
+      <span class="author-block">Habibeh Vosoughi<sup>4,*</sup></span>,
+      <span class="author-block">Saeed Reza Kheradpisheh<sup>2,*</sup></span>
+    </div>
+
+    <div class="affiliations">
+      <span class="aff-num">1</span>Department of Medical Physics, School of Medicine, Iran University of Medical Sciences, Tehran, Iran &nbsp;&middot;&nbsp;
+      <span class="aff-num">2</span>Department of Computer and Data Sciences, Faculty of Mathematical Sciences, Shahid Beheshti University, Tehran, Iran &nbsp;&middot;&nbsp;
+      <span class="aff-num">3</span>Nuclear Medicine and Molecular Imaging Department, Imam Reza International University, Razavi Hospital, Mashhad, Iran &nbsp;&middot;&nbsp;
+      <span class="aff-num">4</span>Research Center for Nuclear Medicine, Tehran University of Medical Sciences, Tehran, Iran &nbsp;&middot;&nbsp;
+      <span class="aff-num">5</span><span class="placeholder">[affiliation not specified in the manuscript &mdash; placeholder]</span> &nbsp;&middot;&nbsp;
+      <span class="aff-num">6</span>Department of Nuclear Medicine, Children Medical Center, Tehran University of Medical Sciences, Tehran, Iran
+    </div>
+
+    <div class="corresponding">
+      * Corresponding authors &mdash;
+      Elmira Yazdani: <a href="mailto:Yazdani.el@iums.ac.ir">Yazdani.el@iums.ac.ir</a> &middot;
+      Habibeh Vosoughi: <a href="mailto:vosoughih@tums.ac.ir">vosoughih@tums.ac.ir</a> &middot;
+      Saeed Reza Kheradpisheh: <a href="mailto:s_kheradpisheh@sbu.ac.ir">s_kheradpisheh@sbu.ac.ir</a>
+    </div>
+
+    <div class="hero-buttons">
+      <a href="#" class="btn btn-disabled" title="PDF not yet published — placeholder">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 2a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6H6zm7 1.5L18.5 9H13V3.5zM8 13h2.2a2.2 2.2 0 0 1 0 4.4H9v1.6H8V13zm1 1v1.4h1.2a.7.7 0 0 0 0-1.4H9zm4.2-1H15c1.1 0 2 1.1 2 2.5s-.9 2.5-2 2.5h-1.8v-5zm1 1v3h.8c.6 0 1-.7 1-1.5s-.4-1.5-1-1.5h-.8zM17.5 13h3v1h-2v1h1.8v1h-1.8v2h-1v-5z"/></svg>
+        <span>Paper PDF (coming soon)</span>
+      </a>
+      <a href="#" class="btn btn-outline btn-disabled" title="Repository will be linked here">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.53 2.36 1.09 2.94.83.09-.65.35-1.09.63-1.34-2.22-.25-4.56-1.11-4.56-4.95 0-1.1.39-1.99 1.03-2.69-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02a9.4 9.4 0 0 1 5 0c1.91-1.3 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.69 0 3.85-2.35 4.7-4.58 4.94.36.31.68.92.68 1.85v2.75c0 .27.18.58.69.48A10 10 0 0 0 12 2z"/></svg>
+        <span>Code (repository link pending)</span>
+      </a>
+      <a href="#" class="btn btn-outline btn-disabled" title="Dataset will be released on Kaggle upon publication">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M5 20h14v-2H5v2zM19 9h-4V3H9v6H5l7 7 7-7z"/></svg>
+        <span>Dataset (Kaggle, upon publication)</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+<!-- ══════════ TEASER ══════════ -->
+<div class="figure teaser-figure">
+  <div class="container">
+    <img src="./static/images/figures/fig01.jpg" alt="Overall study workflow: multicenter data acquisition, preprocessing, framework-specific input construction, model development and cross-validation, inference, and evaluation." loading="lazy">
+    <div class="figure-caption">
+      <strong>Figure 1.</strong> Overall study workflow, from multicenter [<sup>99m</sup>Tc]Tc&#8209;pertechnetate thyroid scintigraphy data acquisition and quality screening, through image preprocessing, framework-specific input construction, stratified five-fold cross-validation model development, inference, explainability analysis, and reporting.
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ ABSTRACT ══════════ -->
+<section class="page-section" id="abstract">
+  <div class="section-inner">
+    <div class="section-label">Abstract</div>
+    <h2 class="section-heading">Summary</h2>
+    <div class="abstract-block">
+      <p><strong>Introduction:</strong> Thyroid scintigraphy is a crucial imaging technique used for assessing thyroid abnormalities; nevertheless, automatic analysis of these images poses difficulties because of the heterogeneous nature of diseases, overlap between different scintigraphy images, and the absence of large annotated databases. While deep learning (DL) techniques have proven successful in the field of medical imaging, the presented performances were achieved under idealized conditions. In this work, DL approaches to thyroid scintigraphy classification were studied under difficult multi-center conditions, and whether more complex image representations or network architectures would improve performance was investigated.</p>
+      <p><strong>Methods:</strong> Images from 2,448 cases of [<sup>99m</sup>Tc]Tc&#8209;pertechnetate thyroid scintigraphy scans were acquired from five nuclear medicine centers. Images were annotated to four diagnostic classes: normal, thyroiditis, tumoral, and diffuse goiter. Three DL experiments were compared with identical stratified five-fold cross-validation: (1) baseline single-channel CNN architectures, (2) a three-channel representation including grayscale, Fourier transform magnitude, and Sobel edge channels, and (3) a mixture-of-experts (MoE) system that includes class-specific expert networks. Predictions from the models were visualized using Grad-CAM. Also, a binary classification analysis was conducted on tumoral and non-tumoral cases.</p>
+      <p><strong>Results:</strong> DenseNet121 performed the best on the baseline task, with an accuracy of 0.655&plusmn;0.032 and a macro-ROC-AUC of 0.836&plusmn;0.034 for the four-class classification task. Neither frequency- nor gradient-representation augmentations nor MoE helped to achieve consistent improvement, which indicates that additional models or input complexity does not lead to better generalization. Grad-CAMs showed that the predictions were based mostly on thyroid uptake areas. For the two-class problem, DenseNet121 obtained better discrimination with an accuracy of 0.773&plusmn;0.011 and ROC-AUC of 0.848.</p>
+      <p><strong>Conclusion:</strong> The performance of DL algorithms in thyroid scintigraphy is highly dependent on dataset complexity, diagnosis overlap, and data annotation level. These results demonstrate the need for realistic clinical benchmarks and explainable AI in nuclear medicine. The dataset, trained models, and code are publicly available for future development.</p>
+    </div>
+    <div class="keywords">
+      <strong>Keywords:</strong> [<sup>99m</sup>Tc]Tc&#8209;pertechnetate thyroid scintigraphy &middot; Deep convolutional neural networks &middot; Multicenter study &middot; Explainable artificial intelligence (XAI) &middot; Computer-aided diagnosis (CAD)
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ METHOD ══════════ -->
+<section class="page-section soft" id="method">
+  <div class="section-inner wide">
+    <div class="section-label">Method</div>
+    <h2 class="section-heading">Three frameworks, one common protocol</h2>
+    <p class="lede">A dataset of 2,448 planar [<sup>99m</sup>Tc]Tc&#8209;pertechnetate thyroid scintigraphy images was retrospectively collected from five nuclear medicine centers (1,084 / 174 / 93 / 619 / 478 images respectively) and consolidated into four diagnostic classes &mdash; Normal (341), Thyroiditis (466), Tumoral (924), and Diffuse Goiter (717) &mdash; from eight original clinical categories. Images were denoised with SwinIR, deblurred with NAFNet, contrast-enhanced with CLAHE, and standardized to 128&times;128 pixels. All three frameworks below were evaluated under an identical stratified five-fold cross-validation protocol (fixed seed, ~80/20 train/validation split per fold) so that differences in performance reflect architecture and representation choices rather than data partitioning.</p>
+
+    <div class="method-cards">
+      <div class="method-card">
+        <span class="tag">Experiment 1</span>
+        <h4>Baseline single-channel CNNs</h4>
+        <p>Five established architectures &mdash; VGG11, MobileNetV2, ResNet18, EfficientNetB0, DenseNet121 &mdash; trained from scratch on the raw grayscale image, with cosine-annealed learning rate over 100 epochs/fold.</p>
+      </div>
+      <div class="method-card">
+        <span class="tag">Experiment 2</span>
+        <h4>Three-channel representation</h4>
+        <p>The grayscale image is stacked with a log-scaled FFT-magnitude channel and a Sobel gradient-magnitude channel, then fed to deeper DenseNet161 / ResNet152 backbones with oversampling for class balance.</p>
+      </div>
+      <div class="method-card">
+        <span class="tag">Experiment 3</span>
+        <h4>Mixture-of-experts (MoE)</h4>
+        <p>Four lightweight one-vs-rest expert CNNs, one per diagnostic class, are trained independently; their frozen positive-class logits are concatenated and fed to a small trainable fusion network for the final four-class decision.</p>
+      </div>
+    </div>
+
+    <div class="figure">
+      <img src="./static/images/figures/fig02.jpg" alt="Grayscale, FFT magnitude, Sobel gradient, and RGB composite representations for diffuse goiter, tumoral, thyroiditis, and normal example images." loading="lazy">
+      <div class="figure-caption">
+        <strong>Figure 2.</strong> Three-channel input construction for representative images from each diagnostic class. From left to right: original grayscale, log-scaled FFT-magnitude spectrum, Sobel gradient-magnitude map, and an RGB composite (R = grayscale, G = FFT, B = Sobel) used for visualization.
+      </div>
+    </div>
+
+    <div class="figure">
+      <img src="./static/images/figures/fig03.jpg" alt="Mixture-of-experts inference pipeline: four frozen class-specific experts feed positive-class logits into a trainable fusion network that outputs the final four-class prediction." loading="lazy">
+      <div class="figure-caption">
+        <strong>Figure 3.</strong> Inference pipeline of the mixture-of-experts framework. Four frozen class-specific experts each produce a positive-class logit; the four logits are concatenated and passed through the trained fusion network to obtain the final four-class prediction via argmax.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ RESULTS ══════════ -->
+<section class="page-section" id="results">
+  <div class="section-inner wide">
+    <div class="section-label">Results</div>
+    <h2 class="section-heading">Does more complexity help?</h2>
+    <p class="lede">Across all three frameworks, added representational or architectural complexity did not translate into consistent gains &mdash; the single-channel DenseNet121 baseline remained the strongest overall model.</p>
+
+    <h3 class="subsection-heading">Baseline CNN classification</h3>
+    <p>DenseNet121 achieved the strongest and most consistent baseline performance across all reported metrics.</p>
+    <div class="table-wrapper">
+      <table>
+        <caption><strong>Table 1.</strong> Baseline CNN performance across five-fold cross-validation (mean &plusmn; 95% CI).</caption>
+        <thead>
+          <tr><th>Model</th><th>Accuracy</th><th>Macro Precision</th><th>Macro Recall</th><th>Macro F1</th><th>Macro ROC-AUC</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>VGG11</td><td>0.585 &plusmn; 0.136</td><td>0.526 &plusmn; 0.298</td><td>0.515 &plusmn; 0.184</td><td>0.492 &plusmn; 0.244</td><td>0.773 &plusmn; 0.145</td></tr>
+          <tr><td>MobileNetV2</td><td>0.631 &plusmn; 0.023</td><td>0.614 &plusmn; 0.034</td><td>0.591 &plusmn; 0.039</td><td>0.592 &plusmn; 0.038</td><td>0.810 &plusmn; 0.223</td></tr>
+          <tr><td>ResNet18</td><td>0.637 &plusmn; 0.028</td><td>0.615 &plusmn; 0.033</td><td>0.601 &plusmn; 0.037</td><td>0.597 &plusmn; 0.039</td><td>0.811 &plusmn; 0.186</td></tr>
+          <tr><td>EfficientNetB0</td><td>0.640 &plusmn; 0.019</td><td>0.645 &plusmn; 0.051</td><td>0.582 &plusmn; 0.016</td><td>0.581 &plusmn; 0.023</td><td>0.824 &plusmn; 0.078</td></tr>
+          <tr><td><strong>DenseNet121</strong></td><td class="cell-best">0.655 &plusmn; 0.032</td><td class="cell-best">0.651 &plusmn; 0.038</td><td class="cell-best">0.613 &plusmn; 0.046</td><td class="cell-best">0.615 &plusmn; 0.050</td><td class="cell-best">0.836 &plusmn; 0.034</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="figure">
+      <img src="./static/images/figures/fig04.jpg" alt="Class-specific ROC curves for the five baseline CNN architectures, one-vs-rest for diffuse goiter, tumoral, thyroiditis, and normal classes." loading="lazy">
+      <div class="figure-caption"><strong>Figure 4.</strong> Class-specific ROC curves for the five baseline CNN architectures across five-fold cross-validation. Thyroiditis was consistently the most discriminable class (AUC 0.91&ndash;0.96); normal was consistently the hardest (AUC 0.67&ndash;0.75).</div>
+    </div>
+    <div class="figure">
+      <img src="./static/images/figures/fig05.jpg" alt="Mean normalized confusion matrices for the five baseline CNN architectures." loading="lazy">
+      <div class="figure-caption"><strong>Figure 5.</strong> Mean normalized confusion matrices of the five baseline CNN models. DenseNet121 gave the most balanced result (recall 0.64 / 0.74 / 0.83 / 0.25 for diffuse goiter, tumoral, thyroiditis, normal); the normal class was consistently confused with tumoral and diffuse goiter.</div>
+    </div>
+
+    <h3 class="subsection-heading">Three-channel framework</h3>
+    <p>Adding FFT-magnitude and Sobel-gradient channels and moving to deeper backbones (DenseNet161, ResNet152) did not surpass the single-channel DenseNet121 baseline.</p>
+    <div class="table-wrapper">
+      <table>
+        <caption><strong>Table 2.</strong> Three-channel CNN performance across five-fold cross-validation (mean &plusmn; 95% CI).</caption>
+        <thead>
+          <tr><th>Model</th><th>Accuracy</th><th>Weighted Precision</th><th>Weighted Recall</th><th>Weighted F1</th><th>Macro ROC-AUC</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>ResNet152</td><td>0.617 &plusmn; 0.018</td><td>0.603 &plusmn; 0.020</td><td>0.617 &plusmn; 0.018</td><td>0.596 &plusmn; 0.022</td><td>0.801 &plusmn; 0.121</td></tr>
+          <tr><td><strong>DenseNet161</strong></td><td class="cell-best">0.639 &plusmn; 0.026</td><td class="cell-best">0.634 &plusmn; 0.030</td><td class="cell-best">0.639 &plusmn; 0.026</td><td class="cell-best">0.622 &plusmn; 0.035</td><td>0.80 &plusmn; 0.034</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="figure">
+      <img src="./static/images/figures/fig06.jpg" alt="ROC curves for the DenseNet161 and ResNet152 three-channel models." loading="lazy">
+      <div class="figure-caption"><strong>Figure 6.</strong> One-vs-rest ROC curves for the DenseNet161 and ResNet152 three-channel models. Thyroiditis remained the most separable class (AUC &asymp; 0.95) for both architectures.</div>
+    </div>
+    <div class="figure">
+      <img src="./static/images/figures/fig07.jpg" alt="Mean normalized confusion matrices for the three-channel ResNet152 and DenseNet161 models." loading="lazy">
+      <div class="figure-caption"><strong>Figure 7.</strong> Mean normalized confusion matrices for the three-channel models. Normal remained the hardest class, most often confused with tumoral disease and diffuse goiter.</div>
+    </div>
+
+    <h3 class="subsection-heading">Mixture-of-experts framework</h3>
+    <p>The MoE framework reached an overall accuracy of 0.585&plusmn;0.042 &mdash; below both single-channel and three-channel baselines &mdash; but its per-expert logits offer a direct, class-level explanation of the model's decision process.</p>
+    <div class="table-wrapper">
+      <table>
+        <caption><strong>Table 3.</strong> Overall and class-specific MoE performance across five-fold cross-validation (mean &plusmn; 95% CI).</caption>
+        <thead>
+          <tr><th>Metric</th><th>Overall / Macro</th><th>Diffuse Goiter</th><th>Tumoral</th><th>Thyroiditis</th><th>Normal</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Accuracy</td><td>0.585 &plusmn; 0.042</td><td>0.742 &plusmn; 0.055</td><td>0.641 &plusmn; 0.048</td><td>0.933 &plusmn; 0.025</td><td>0.854 &plusmn; 0.041</td></tr>
+          <tr><td>Precision</td><td>0.542 &plusmn; 0.073</td><td>0.581 &plusmn; 0.093</td><td>0.532 &plusmn; 0.055</td><td>0.830 &plusmn; 0.059</td><td>0.225 &plusmn; 0.274</td></tr>
+          <tr><td>Recall</td><td>0.527 &plusmn; 0.053</td><td>0.494 &plusmn; 0.205</td><td>0.743 &plusmn; 0.135</td><td>0.794 &plusmn; 0.078</td><td>0.078 &plusmn; 0.124</td></tr>
+          <tr><td>F1-score</td><td>0.512 &plusmn; 0.071</td><td>0.513 &plusmn; 0.144</td><td>0.615 &plusmn; 0.042</td><td>0.809 &plusmn; 0.023</td><td>0.110 &plusmn; 0.171</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="figure">
+      <img src="./static/images/figures/fig08.jpg" alt="Mean confusion matrices of the mixture-of-experts framework, raw counts and row-normalized." loading="lazy">
+      <div class="figure-caption"><strong>Figure 8.</strong> Mean confusion matrices of the MoE framework (counts, left; row-normalized, right). Thyroiditis and tumoral were the most reliably classified; the normal class was almost entirely absorbed into tumoral (66%) and diffuse goiter (22%) predictions.</div>
+    </div>
+    <div class="figure">
+      <img src="./static/images/figures/fig09.jpg" alt="Heatmap of the mean positive-class logit produced by each expert, broken down by true diagnostic class." loading="lazy">
+      <div class="figure-caption"><strong>Figure 9.</strong> Mean positive-class logit produced by each of the four experts, by true diagnostic class. Expert 3 (thyroiditis) shows a sharply positive response only for true thyroiditis cases (1.92 &plusmn; 1.10); Expert 4 (normal) never develops a clearly dominant positive response, consistent with the class's poor recall.</div>
+    </div>
+    <div class="figure">
+      <img src="./static/images/figures/fig10.jpg" alt="Boxplots of pooled positive-class logit distributions per expert, for each true diagnostic class, with correct-classification counts." loading="lazy">
+      <div class="figure-caption"><strong>Figure 10.</strong> Pooled expert-logit distributions per true class across five folds. Thyroiditis (79.4% correct) and tumoral (74.3% correct) show a clearly separated matching expert; diffuse goiter (49.3%) and especially normal (7.7%) show heavy overlap between experts.</div>
+    </div>
+
+    <h3 class="subsection-heading">Explainability with Grad-CAM</h3>
+    <p>Across every framework, Grad-CAM attention concentrated on the thyroid uptake region rather than image background, indicating the networks learned physiologically relevant features. The MoE experts produced more spatially localized, class-specific attention than the single-branch baseline and three-channel models. Drag the slider below to compare a baseline DenseNet121 attention map against a class-specific MoE expert attention map on the same kind of case.</p>
+
+    <div class="compare-wrap">
+      <div class="compare">
+        <img class="compare-before" src="./static/images/figures/fig11.jpg" alt="Baseline DenseNet121 Grad-CAM examples: original image, heatmap, and overlay for correctly and incorrectly classified cases.">
+        <img class="compare-after" src="./static/images/figures/fig14.jpg" alt="MoE expert Grad-CAM examples for the diffuse goiter and tumoral class-specific experts.">
+        <div class="compare-handle"></div>
+        <span class="compare-label label-before">Baseline CNN (Fig. 11)</span>
+        <span class="compare-label label-after">MoE experts (Fig. 14)</span>
+      </div>
+      <input type="range" id="compare-range" min="0" max="100" value="50" aria-label="Slide to compare baseline and MoE Grad-CAM attention maps">
+      <div class="figure-caption" style="text-align:center;">
+        <strong>Left:</strong> DenseNet121 baseline Grad-CAM for correctly/incorrectly classified diffuse goiter, normal, tumoral, and thyroiditis cases (Figure 11). <strong>Right:</strong> class-specific MoE expert attention for the diffuse-goiter and tumoral detectors (Figure 14) &mdash; note the more compact, class-localized activation.
+      </div>
+    </div>
+
+    <div class="figure">
+      <img src="./static/images/figures/fig12.jpg" alt="Grad-CAM visualization of the DenseNet161 three-channel model for correctly and incorrectly classified cases." loading="lazy">
+      <div class="figure-caption"><strong>Figure 12.</strong> Grad-CAM visualization for the DenseNet161 three-channel model. Attention patterns closely resemble the baseline model despite the additional FFT and Sobel input channels.</div>
+    </div>
+    <div class="figure">
+      <img src="./static/images/figures/fig13.jpg" alt="Grad-CAM visualization for the MoE thyroiditis and normal class-specific experts." loading="lazy">
+      <div class="figure-caption"><strong>Figure 13.</strong> Grad-CAM representation of the MoE architecture for the thyroiditis and normal class-specific experts, for correctly and incorrectly classified cases.</div>
+    </div>
+
+    <h3 class="subsection-heading">Effect of classification granularity</h3>
+    <p>Collapsing the four-class problem to a binary tumoral vs. non-tumoral task improved discrimination for every framework, most notably for the single-channel baseline.</p>
+    <div class="table-wrapper">
+      <table>
+        <caption><strong>Table 4.</strong> Binary (tumoral vs. non-tumoral) classification performance (mean &plusmn; 95% CI).</caption>
+        <thead>
+          <tr><th>Framework</th><th>Model</th><th>Accuracy</th><th>Macro Precision</th><th>Macro Recall</th><th>Macro F1</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Single-channel grayscale</td><td><strong>DenseNet121</strong></td><td class="cell-best">0.773 &plusmn; 0.011</td><td class="cell-best">0.771 &plusmn; 0.012</td><td class="cell-best">0.762 &plusmn; 0.017</td><td class="cell-best">0.752 &plusmn; 0.012</td></tr>
+          <tr><td>Three-channel (grayscale + FFT + gradient)</td><td>DenseNet161</td><td>0.763 &plusmn; 0.009</td><td>0.755 &plusmn; 0.014</td><td>0.737 &plusmn; 0.008</td><td>0.743 &plusmn; 0.008</td></tr>
+          <tr><td>Mixture-of-Experts</td><td>DenseNet161</td><td>0.677 &plusmn; 0.015</td><td>0.660 &plusmn; 0.018</td><td>0.636 &plusmn; 0.028</td><td>0.636 &plusmn; 0.030</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="figure">
+      <img src="./static/images/figures/fig15.jpg" alt="Confusion matrix and ROC curves for the best binary (tumoral vs non-tumoral) DenseNet121 model." loading="lazy">
+      <div class="figure-caption"><strong>Figure 15.</strong> Best binary DenseNet121 model: confusion matrix (top) and ROC curves (bottom). Macro/micro/weighted AUC = 0.848 / 0.853 / 0.848. The model correctly identified 263/288 (91%) non-tumoral and 104/184 (57%) tumoral cases &mdash; high specificity, comparatively lower sensitivity for tumoral disease.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ CONCLUSION ══════════ -->
+<section class="page-section soft" id="conclusion">
+  <div class="section-inner">
+    <div class="section-label">Conclusion</div>
+    <h2 class="section-heading">Clinical takeaway</h2>
+    <p>This work compared three deep learning approaches for four-class classification of thyroid scintigraphy under a difficult, unbalanced, multicenter dataset representative of real clinical conditions. DenseNet121 &mdash; the simplest, single-channel baseline &mdash; reached the highest performance; neither the added frequency/gradient channels nor the mixture-of-experts architecture improved on it. Classification performance appears driven more by dataset heterogeneity and class-specific characteristics than by network or input complexity: thyroiditis was consistently the most separable class across every framework, while the normal class &mdash; heterogeneous by construction, combining true-normal and warm-nodule cases &mdash; was consistently the hardest to recognize. Because class-specific recall varied substantially, overall accuracy alone should not be used to judge clinical usefulness; these models are best understood as decision-support tools rather than stand-alone diagnostic systems. The study serves as a realistic benchmark for multicenter thyroid scintigraphy classification and motivates further work on explainable AI and cross-center generalization in nuclear medicine.</p>
+  </div>
+</section>
+
+<!-- ══════════ DATA & CODE ══════════ -->
+<section class="page-section" id="data">
+  <div class="section-inner">
+    <div class="section-label">Data &amp; Code Availability</div>
+    <h2 class="section-heading">Availability</h2>
+    <p>The de-identified thyroid scintigraphy dataset analyzed in this study, together with the source code required to reproduce preprocessing, model development, training, and the principal analyses, will be made publicly available through Kaggle upon publication of the article. The release will include the scintigraphy images and diagnostic labels, the mapping between the original eight diagnostic categories and the four consolidated classes, and implementations of the baseline CNN, three-channel, and mixture-of-experts frameworks.</p>
+    <div class="notice-box">Dataset and code links are placeholders until the paper is published &mdash; check back, or watch the GitHub repository, for the release.</div>
+    <p style="font-size:0.85rem; color:var(--text-secondary);">This retrospective multicenter study was approved by the Ethics Committee of the Iran University of Medical Sciences (IUMS) under approval IR.IUMS.REC.1405.163. All imaging data were de-identified prior to research use and public release.</p>
+  </div>
+</section>
+
+<!-- ══════════ CITATION ══════════ -->
+<section class="page-section soft" id="citation">
+  <div class="section-inner">
+    <div class="section-label">Citation</div>
+    <h2 class="section-heading">BibTeX</h2>
+    <div class="notice-box">Venue and year are placeholders &mdash; this manuscript has not yet been published; update this block once it is accepted.</div>
+    <div class="bibtex-header">
+      <span></span>
+      <button class="copy-btn" onclick="copyBibtex()"><span id="copy-btn-label">Copy</span></button>
+    </div>
+    <pre class="bibtex-code" id="bibtex-code">@article{yazdani2026thyroidxai,
+  title   = {Explainable Deep Learning for Multicenter [99mTc]Tc-Pertechnetate Thyroid Scintigraphy: Comparative CNN, Multi-Representation, and Mixture-of-Experts Frameworks for Four-Class Classification},
+  author  = {Yazdani, Elmira and Nesari, Mobin and Emami, Farshad and Karamzade-Ziarati, Najme and Vosoughi, Zahra and Bagheri, Soroush and Vosoughi, Habibeh and Kheradpisheh, Saeed Reza},
+  journal = {Preprint forthcoming},
+  year    = {2026},
+  note    = {Manuscript under preparation; venue to be updated upon publication}
+}</pre>
+  </div>
+</section>
+
+<!-- ══════════ FOOTER ══════════ -->
+<footer class="site-footer">
+  <p>
+    Project page built with a layout adapted from the
+    <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank" rel="noopener">Academic Project Page Template</a>
+    (structure and Bulma-based layout) and the
+    <a href="https://github.com/seemandhar/paper-template" target="_blank" rel="noopener">paper-template</a>
+    (asset organization). Both are licensed under
+    <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>.
+  </p>
+</footer>
+
+<script src="./static/js/main.js"></script>
+</body>
+</html>
