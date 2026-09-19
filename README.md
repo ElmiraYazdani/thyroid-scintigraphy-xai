@@ -5,7 +5,7 @@ Static GitHub Pages site for the paper *"Explainable Deep Learning for Multicent
 Multi-Representation, and Mixture-of-Experts Frameworks for Four-Class
 Classification."*
 
-**Live site:** https://elmirayazdani.github.io/thyroid-scintigraphy-xai/
+**Live site:** https://mobinnesari81.github.io/thyroid-scintigraphy-xai/
 ## What's here
 
 - `index.html` — single-page site (abstract, method, results, conclusion, data/code availability, BibTeX)
