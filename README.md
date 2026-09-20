@@ -7,8 +7,8 @@ Scintigraphy: A Multicenter Study."*
 
 **Live site:** https://elmirayazdani.github.io/thyroid-scintigraphy-xai/
 
-The page is currently anonymized for double-blind review — author names,
-affiliations, institution, and the ethics approval ID are withheld.
+Authors, affiliations, corresponding-author contacts, and the ethics approval
+ID are listed on the page in the same order as the manuscript.
 
 ## What's here
 
@@ -19,9 +19,9 @@ Published (tracked, served by GitHub Pages):
 - `static/images/figures/fig01.jpg` … `fig12.jpg` — downsized copies of the 12 manuscript figures
 - `static/images/og-preview.jpg` — social-card image (Figure 1)
 
-Local only (`source_materials/` is git-ignored and never published — it holds the
-non-anonymized manuscript, so keep it out of the repo while the paper is under
-double-blind review):
+Local only (`source_materials/` is git-ignored and never published — the
+manuscript is not public yet, and the full-resolution figures are far too large
+for a Pages repo):
 
 - `source_materials/manuscript/` — the manuscript PDF (`Main_Manuscript_09202026.pdf`)
 - `source_materials/figures/` — full-resolution submission figures `Figure 1.jpg` … `Figure 12.jpg` (~78 MB)
