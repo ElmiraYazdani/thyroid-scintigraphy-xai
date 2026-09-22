@@ -16,7 +16,7 @@ Published (tracked, served by GitHub Pages):
 
 - `index.html` — single-page site (abstract, method, results, conclusion, data/code availability, BibTeX)
 - `static/css/`, `static/js/` — stylesheet and page scripts
-- `static/images/figures/fig01.jpg` … `fig12.jpg` — downsized copies of the 12 manuscript figures
+- `static/images/figures/fig01.jpg` … `fig11.jpg` — downsized copies of the 11 manuscript figures
 - `static/images/og-preview.jpg` — social-card image (Figure 1)
 
 Local only (`source_materials/` is git-ignored and never published — the
@@ -24,7 +24,7 @@ manuscript is not public yet, and the full-resolution figures are far too large
 for a Pages repo):
 
 - `source_materials/manuscript/` — the manuscript PDF (`Main_Manuscript_09202026.pdf`)
-- `source_materials/figures/` — full-resolution submission figures `Figure 1.jpg` … `Figure 12.jpg` (~78 MB)
+- `source_materials/figures/` — full-resolution submission figures `Figure 1.jpg` … `Figure 11.jpg` (~78 MB)
 
 ## Regenerating the web figures
 
@@ -32,7 +32,7 @@ Web copies in `static/images/figures/` are produced from the submission figures
 at 1600 px width:
 
 ```bash
-for i in $(seq 1 12); do
+for i in $(seq 1 11); do
   sips --resampleWidth 1600 -s format jpeg -s formatOptions 68 \
     "source_materials/figures/Figure $i.jpg" \
     --out "$(printf 'static/images/figures/fig%02d.jpg' $i)"

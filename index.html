@@ -335,14 +335,14 @@
     <div class="compare-wrap">
       <div class="compare">
         <img class="compare-before" src="./static/images/figures/fig08.jpg" alt="Baseline DenseNet121 Grad-CAM examples: original image, heatmap, and overlay for correctly and incorrectly classified cases.">
-        <img class="compare-after" src="./static/images/figures/fig10.jpg" alt="MoE expert Grad-CAM examples for the diffuse goiter and tumoral class-specific experts.">
+        <img class="compare-after" src="./static/images/figures/fig09.jpg" alt="MoE expert Grad-CAM examples for the diffuse goiter and tumoral class-specific experts.">
         <div class="compare-handle"></div>
         <span class="compare-label label-before">Baseline CNN (Fig. 8)</span>
-        <span class="compare-label label-after">MoE experts (Fig. 10)</span>
+        <span class="compare-label label-after">MoE experts (Fig. 9)</span>
       </div>
       <input type="range" id="compare-range" min="0" max="100" value="50" aria-label="Slide to compare baseline and MoE Grad-CAM attention maps">
       <div class="figure-caption" style="text-align:center;">
-        <strong>Left:</strong> DenseNet121 baseline Grad-CAM for correctly and incorrectly classified cases (Figure 8). <strong>Right:</strong> class-specific MoE expert attention (Figure 10) &mdash; note the more compact, class-localized activation. Both panels are cropped to a common aspect ratio; the full figures appear below.
+        <strong>Left:</strong> DenseNet121 baseline Grad-CAM for correctly and incorrectly classified cases (Figure 8). <strong>Right:</strong> class-specific MoE expert attention (Figure 9) &mdash; note the more compact, class-localized activation. Both panels are cropped to a common aspect ratio; the full figures appear below.
       </div>
     </div>
 
@@ -351,16 +351,12 @@
       <div class="figure-caption"><strong>Figure 8.</strong> Grad-CAM output for the DenseNet121 baseline classification on representative test images. Each row displays the input thyroid scintigraphy image, the Grad-CAM heatmap, and the overlay of the heatmap on the input, for both correctly and incorrectly classified cases.</div>
     </div>
     <div class="figure">
-      <img src="./static/images/figures/fig09.jpg" alt="Grad-CAM visualization of the DenseNet161 three-channel model for correctly and incorrectly classified cases." loading="lazy">
-      <div class="figure-caption"><strong>Figure 9.</strong> Grad-CAM visualization for the three-channel DenseNet161 variant, which complements the grayscale image with derived frequency- and gradient-domain representations. Activation maps concentrate on the thyroid region and closely resemble the baseline maps, indicating no substantial change in the discriminative regions learned despite the additional input features.</div>
+      <img src="./static/images/figures/fig09.jpg" alt="Grad-CAM visualization for the MoE diffuse-goiter and tumoral class-specific experts." loading="lazy">
+      <div class="figure-caption"><strong>Figure 9.</strong> Grad-CAM representation of the MoE architecture for the diffuse-goiter (Expert&nbsp;0) and tumoral (Expert&nbsp;1) class-specific experts. In each row the original scintigraphy image (left), the Grad-CAM heatmap (middle), and the overlay (right) are shown for correctly and incorrectly voted cases.</div>
     </div>
     <div class="figure">
-      <img src="./static/images/figures/fig10.jpg" alt="Grad-CAM visualization for the MoE diffuse-goiter and tumoral class-specific experts." loading="lazy">
-      <div class="figure-caption"><strong>Figure 10.</strong> Grad-CAM representation of the MoE architecture for the diffuse-goiter (Expert&nbsp;0) and tumoral (Expert&nbsp;1) class-specific experts. In each row the original scintigraphy image (left), the Grad-CAM heatmap (middle), and the overlay (right) are shown for correctly and incorrectly voted cases.</div>
-    </div>
-    <div class="figure">
-      <img src="./static/images/figures/fig11.jpg" alt="Grad-CAM visualization for the MoE thyroiditis and normal class-specific experts." loading="lazy">
-      <div class="figure-caption"><strong>Figure 11.</strong> Grad-CAM representation of the MoE architecture for the thyroiditis (Expert&nbsp;2) and normal (Expert&nbsp;3) class-specific experts. The attention patterns illustrate each expert&rsquo;s localization to thyroid uptake regions and its specialized decision behavior.</div>
+      <img src="./static/images/figures/fig10.jpg" alt="Grad-CAM visualization for the MoE thyroiditis and normal class-specific experts." loading="lazy">
+      <div class="figure-caption"><strong>Figure 10.</strong> Grad-CAM representation of the MoE architecture for the thyroiditis (Expert&nbsp;2) and normal (Expert&nbsp;3) class-specific experts. The attention patterns illustrate each expert&rsquo;s localization to thyroid uptake regions and its specialized decision behavior.</div>
     </div>
 
     <h3 class="subsection-heading">Effect of classification granularity</h3>
@@ -383,8 +379,8 @@
     <p style="font-size:0.85rem; color:var(--text-secondary);">AUC, area under the curve; MCC, Matthews correlation coefficient; NPV, negative predictive value; PPV, positive predictive value; TNR, true negative rate.</p>
 
     <div class="figure">
-      <img src="./static/images/figures/fig12.jpg" alt="Confusion matrix and ROC curves for the binary tumoral versus non-tumoral DenseNet121 model." loading="lazy">
-      <div class="figure-caption"><strong>Figure 12.</strong> Binary classification performance of the DenseNet121 model for tumoral versus non-tumoral discrimination. Left: mean confusion matrix across five-fold cross-validation (mean counts &plusmn; SD) &mdash; 228.4 &plusmn; 10.1 non-tumoral and 112.2 &plusmn; 9.9 tumoral cases correctly identified, with 52.2 &plusmn; 10.4 tumoral cases labeled non-tumoral and 34.2 &plusmn; 10.1 non-tumoral cases labeled tumoral. Right: ROC curves for the two classes, with an AUC of 0.843 for both.</div>
+      <img src="./static/images/figures/fig11.jpg" alt="Confusion matrix and ROC curves for the binary tumoral versus non-tumoral DenseNet121 model." loading="lazy">
+      <div class="figure-caption"><strong>Figure 11.</strong> Binary classification performance of the DenseNet121 model for tumoral versus non-tumoral discrimination. Left: mean confusion matrix across five-fold cross-validation (mean counts &plusmn; SD) &mdash; 228.4 &plusmn; 10.1 non-tumoral and 112.2 &plusmn; 9.9 tumoral cases correctly identified, with 52.2 &plusmn; 10.4 tumoral cases labeled non-tumoral and 34.2 &plusmn; 10.1 non-tumoral cases labeled tumoral. Right: ROC curves for the two classes, with an AUC of 0.843 for both.</div>
     </div>
   </div>
 </section>
