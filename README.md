@@ -1,6 +1,6 @@
 # Thyroid Scintigraphy XAI — Project Page
 
-Static GitHub Pages site for the paper *"An Explainable Deep Learning Medical
+Static GitHub Pages site for the paper *"An Explainable Deep Learning
 Mixture-of-Experts Framework with GAN-Based Data Augmentation for Four-Class
 Classification of Thyroid Disease Using [<sup>99m</sup>Tc]Tc-Pertechnetate
 Scintigraphy: A Multicenter Study."*
@@ -14,16 +14,15 @@ ID are listed on the page in the same order as the manuscript.
 
 Published (tracked, served by GitHub Pages):
 
-- `index.html` — single-page site (abstract, method, results, conclusion, data/code availability, BibTeX)
+- `index.html` — single-page summary site (abstract, method, key results, conclusion, data/code availability, BibTeX)
+- `Main_Manuscript.pdf` — the manuscript; the page's "Paper PDF" button opens it on GitHub
 - `static/css/`, `static/js/` — stylesheet and page scripts
 - `static/images/figures/fig01.jpg` … `fig11.jpg` — downsized copies of the 11 manuscript figures
 - `static/images/og-preview.jpg` — social-card image (Figure 1)
 
 Local only (`source_materials/` is git-ignored and never published — the
-manuscript is not public yet, and the full-resolution figures are far too large
-for a Pages repo):
+full-resolution figures are far too large for a Pages repo):
 
-- `source_materials/manuscript/` — the manuscript PDF (`Main_Manuscript_09202026.pdf`)
 - `source_materials/figures/` — full-resolution submission figures `Figure 1.jpg` … `Figure 11.jpg` (~78 MB)
 
 ## Regenerating the web figures
